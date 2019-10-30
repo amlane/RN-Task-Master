@@ -5,19 +5,7 @@ export default class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      tasks: [{
-        id: 1,
-        text: "clean the house",
-        completed: false
-      }, {
-        id: 2,
-        text: "bake some cookies",
-        completed: false
-      }, {
-        id: 3,
-        text: "make granola",
-        completed: true
-      }],
+      tasks: [],
       newTask: ""
     }
   }
@@ -55,21 +43,23 @@ export default class App extends React.Component {
       <>
         <View style={styles.header}>
           <Text style={styles.title}>TO DO</Text>
+          <Text style={styles.subtitle}>a remindery app</Text>
         </View>
 
         <View style={styles.form}>
           <TextInput
+            placeholder="What are your goals..."
             style={styles.inputField}
             value={this.state.newTask}
             name="newTask"
             onChangeText={(newTask) => this.setState({ newTask })}
           />
           <View style={styles.btnCtnr}>
-            <TouchableHighlight style={styles.customBtn}>
-              <Text style={styles.btnText}>clear completed</Text>
+            <TouchableHighlight style={styles.clearCompletedBtn}>
+              <Text style={styles.clearCompletedBtnText}>clear completed</Text>
             </TouchableHighlight>
-            <TouchableHighlight style={styles.customBtn} onPress={this.handleSubmit}>
-              <Text style={styles.btnText}>+</Text>
+            <TouchableHighlight style={styles.addBtn} onPress={this.handleSubmit}>
+              <Text style={styles.addBtnText}>+</Text>
             </TouchableHighlight>
           </View>
         </View>
@@ -94,20 +84,24 @@ const styles = StyleSheet.create({
     backgroundColor: '#8F62E4'
   },
   form: {
-    flex: 2,
+    flex: 1.5,
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: "#2B0D57"
   },
   container: {
-    flex: 4,
+    flex: 5,
     alignItems: 'center',
     backgroundColor: "#2B0D57"
   },
   title: {
-    fontSize: 50,
+    fontSize: 54,
     color: "#01C7F8",
     fontWeight: "bold"
+  },
+  subtitle: {
+    fontSize: 20,
+    color: "#d3d3d3"
   },
   inputField: {
     borderRadius: 5,
@@ -115,23 +109,38 @@ const styles = StyleSheet.create({
     fontSize: 18,
     width: '90%',
     margin: 5,
-    padding: 5
+    padding: 10
   },
   btnCtnr: {
     flexDirection: 'row'
   },
-  customBtn: {
+  addBtn: {
     borderRadius: 3,
     backgroundColor: "#FF3285",
-    width: '48%',
+    width: '15%',
     margin: 5,
+    padding: 5,
     alignItems: 'center',
     justifyContent: 'center'
   },
-  btnText: {
+  addBtnText: {
     color: '#fafafa',
     textAlign: 'center',
-    fontSize: 24
+    fontSize: 30
+  },
+  clearCompletedBtn: {
+    borderRadius: 3,
+    backgroundColor: "#8C5FE1",
+    width: '73%',
+    margin: 5,
+    padding: 10,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  clearCompletedBtnText: {
+    color: '#fafafa',
+    textAlign: 'center',
+    fontSize: 20
   },
   taskText: {
     borderRadius: 3,
