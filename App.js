@@ -76,7 +76,9 @@ export default class App extends React.Component {
         <View style={styles.container}>
           {this.state.tasks.map(x => {
             return (
-              <Text key={x.id} style={x.completed ? styles.completedTask : styles.taskText} onPress={() => this.toggleCompleted(x.id)}>{x.text}</Text>
+              <View key={x.id} style={x.completed ? styles.completedTaskBox : styles.taskTextBox}>
+                <Text onPress={() => this.toggleCompleted(x.id)} style={x.completed ? styles.completedTaskText : styles.taskText}>{x.text}</Text>
+              </View>
             )
           })}
         </View>
@@ -153,23 +155,27 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 20
   },
-  taskText: {
+  taskTextBox: {
     borderRadius: 3,
     width: '90%',
     padding: 15,
     margin: 10,
-    backgroundColor: '#FFB400',
+    backgroundColor: '#FFB400'
+  },
+  completedTaskBox: {
+    borderRadius: 3,
+    width: '90%',
+    padding: 15,
+    margin: 10,
+    backgroundColor: '#01C7F8'
+  },
+  completedTaskText: {
+    textDecorationLine: 'line-through',
     color: "#fafafa",
     fontSize: 18
   },
-  completedTask: {
-    borderRadius: 3,
-    width: '90%',
-    padding: 15,
-    margin: 10,
-    backgroundColor: '#01C7F8',
+  taskText: {
     color: "#fafafa",
-    textDecorationLine: 'line-through',
     fontSize: 18
   }
 });
