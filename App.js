@@ -23,6 +23,16 @@ export default class App extends React.Component {
     }))
   }
 
+  clearCompleted = () => {
+    const newList = this.state.tasks.filter(t => {
+      return !t.completed
+    })
+    this.setState(prevState => ({
+      ...prevState,
+      tasks: newList
+    }))
+  }
+
   handleSubmit = () => {
     if (this.state.newTask === "") return;
     const newObj = {
@@ -55,7 +65,7 @@ export default class App extends React.Component {
             onChangeText={(newTask) => this.setState({ newTask })}
           />
           <View style={styles.btnCtnr}>
-            <TouchableHighlight style={styles.clearCompletedBtn}>
+            <TouchableHighlight style={styles.clearCompletedBtn} onPress={this.clearCompleted}>
               <Text style={styles.clearCompletedBtnText}>clear completed</Text>
             </TouchableHighlight>
             <TouchableHighlight style={styles.addBtn} onPress={this.handleSubmit}>
@@ -92,7 +102,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 5,
     alignItems: 'center',
-    backgroundColor: "#2B0D57"
+    backgroundColor: "#2B0D57",
+    overflow: "scroll"
   },
   title: {
     fontSize: 54,
