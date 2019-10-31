@@ -33,6 +33,18 @@ export default class App extends React.Component {
     }))
   }
 
+  deleteTask = id => {
+    const newList = this.state.tasks.map(t => {
+      if (t.id !== id) {
+        return t;
+      }
+    })
+    this.setState(prevState => ({
+      ...prevState,
+      tasks: newList
+    }))
+  }
+
   handleSubmit = () => {
     if (this.state.newTask === "") return;
     const newObj = {
@@ -78,6 +90,9 @@ export default class App extends React.Component {
             return (
               <View key={x.id} style={x.completed ? styles.completedTaskBox : styles.taskTextBox}>
                 <Text onPress={() => this.toggleCompleted(x.id)} style={x.completed ? styles.completedTaskText : styles.taskText}>{x.text}</Text>
+                <TouchableHighlight style={styles.deleteBtn} onPress={() => this.deleteTask(x.id)}>
+                  <Text>x</Text>
+                </TouchableHighlight>
               </View>
             )
           })}
@@ -160,14 +175,18 @@ const styles = StyleSheet.create({
     width: '90%',
     padding: 15,
     margin: 10,
-    backgroundColor: '#FFB400'
+    backgroundColor: '#FFB400',
+    flexDirection: 'row',
+    justifyContent: 'space-between'
   },
   completedTaskBox: {
     borderRadius: 3,
     width: '90%',
     padding: 15,
     margin: 10,
-    backgroundColor: '#01C7F8'
+    backgroundColor: '#01C7F8',
+    flexDirection: 'row',
+    justifyContent: 'space-between'
   },
   completedTaskText: {
     textDecorationLine: 'line-through',
@@ -177,5 +196,8 @@ const styles = StyleSheet.create({
   taskText: {
     color: "#fafafa",
     fontSize: 18
+  },
+  deleteBtn: {
+    backgroundColor: '#ff8c69'
   }
 });
